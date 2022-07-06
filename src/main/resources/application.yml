@@ -1,0 +1,23 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+# -------------------- Dubbo BEGIN --------------------
+dubbo:
+  registry:
+    register: false
+    address: zookeeper://localhost:2181
+  application:
+    name: userService-provider
+  protocol:
+    name: dubbo
+    port: 20880
+  provider:
+    retries: 3
+    timeout: 3000
+#  扫描注解包通过该设置将服务注册到zookeeper
+#  (如果UserServiceImpl不在DubboProviderApplication包的同一包或者
+#  子包下则需要制定dubbo接口扫描路径，配置为UserServiceImpl的包路径)，当前状态可不配置
+#  scan: com.lingfeng.provider.springboot.impl;
+#  或者在java代码中的@EnableDubbo标签中配置@EnableDubbo(scanBasePackages = "com.lingfeng.provider.springboot")
+# -------------------- Dubbo END --------------------
